@@ -103,6 +103,10 @@ public class VoiceRecorder: CAPPlugin {
         }
     }
     
+    @objc func getPowers(_ call: CAPPluginCall) {
+        customMediaRecorder?.getPowers()
+    }
+    
     @objc func resumeRecording(_ call: CAPPluginCall) {
         if(customMediaRecorder == nil) {
             call.reject(Messages.RECORDING_HAS_NOT_STARTED)

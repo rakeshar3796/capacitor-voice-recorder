@@ -28,6 +28,7 @@ class CustomMediaRecorder {
             try recordingSession.setActive(true)
             audioFilePath = getDirectoryToSaveAudioFile().appendingPathComponent("\(UUID().uuidString).aac")
             audioRecorder = try AVAudioRecorder(url: audioFilePath, settings: settings)
+            audioRecorder.isMeteringEnabled = true
             audioRecorder.record()
             status = CurrentRecordingStatus.RECORDING
             return true
@@ -52,8 +53,17 @@ class CustomMediaRecorder {
         return audioFilePath
     }
     
+    public func getPowers() {
+        audioRecorder.updateMeters()
+        print("AVERAGE POWER", audioRecorder.averagePower(forChannel: 1) as Any)
+        print("PEAK POWER", audioRecorder.peakPower(forChannel: 1) as Any)
+    }
+    
     public func pauseRecording() -> Bool {
         if(status == CurrentRecordingStatus.RECORDING) {
+            audioRecorder.updateMeters()
+            print("AVERAGE POWER", audioRecorder.averagePower(forChannel: 1) as Any)
+            print("PEAK POWER", audioRecorder.peakPower(forChannel: 1) as Any)
             audioRecorder.pause()
             status = CurrentRecordingStatus.PAUSED
             return true
