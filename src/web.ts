@@ -39,4 +39,8 @@ export class VoiceRecorderWeb extends WebPlugin implements VoiceRecorderPlugin {
     return this.voiceRecorderInstance.getCurrentStatus();
   }
 
+  public getPowers (): Promise<GenericResponse> {
+    return this.voiceRecorderInstance.getPowers();
+  }
+
 }
