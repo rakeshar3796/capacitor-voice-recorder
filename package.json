@@ -11,7 +11,7 @@
     "android/build.gradle",
     "dist/",
     "ios/Plugin/",
-    "KissflowVoiceRecorder.podspec"
+    "KissflowCapacitorVoiceRecorder.podspec"
   ],
   "author": {
     "name": "Rakesh",
