@@ -1,5 +1,5 @@
 {
-  "name": "@kissflow/voice-recorder",
+  "name": "@kissflow/capacitor-voice-recorder",
   "version": "1.0.0",
   "description": "Capacitor plugin for voice recording",
   "main": "dist/plugin.cjs.js",
