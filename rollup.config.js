@@ -4,7 +4,7 @@ export default {
     {
       file: 'dist/plugin.js',
       format: 'iife',
-      name: 'CapacitorVoiceRecorderAr',
+      name: 'KissflowVoiceRecorder',
       globals: {
         '@capacitor/core': 'capacitorExports',
       },

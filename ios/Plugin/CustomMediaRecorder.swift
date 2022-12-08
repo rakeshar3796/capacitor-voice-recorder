@@ -52,10 +52,6 @@ class CustomMediaRecorder {
         return audioFilePath
     }
     
-    public func getPowers() {
-        audioRecorder.updateMeters()
-    }
-    
     public func pauseRecording() -> Bool {
         if(status == CurrentRecordingStatus.RECORDING) {
             audioRecorder.pause()

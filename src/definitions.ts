@@ -33,6 +33,4 @@ export interface VoiceRecorderPlugin {
 
   getCurrentStatus (): Promise<CurrentRecordingStatus>;
   
-  getPowers (): Promise<GenericResponse>;
-
 }

@@ -82,31 +82,10 @@ public class VoiceRecorder: CAPPlugin {
         if(customMediaRecorder == nil) {
             call.reject(Messages.RECORDING_HAS_NOT_STARTED)
         } else {
-            let audioFileUrl = customMediaRecorder?.getOutputFile()
-            if(audioFileUrl == nil) {
-                customMediaRecorder = nil
-                call.reject(Messages.FAILED_TO_FETCH_RECORDING)
-                return
-            }
-            let recordData = RecordData(
-                recordDataBase64: readFileAsBase64(audioFileUrl),
-                mimeType: "audio/aac",
-                msDuration: getMsDurationOfAudioFile(audioFileUrl)
-            )
-            // customMediaRecorder = nil
-            if recordData.recordDataBase64 == nil || recordData.msDuration < 0 {
-                call.reject(Messages.FAILED_TO_FETCH_RECORDING)
-            } else {
-                call.resolve(ResponseGenerator.dataResponse(recordData.toDictionary()))
-            }   
-            // call.resolve(ResponseGenerator.fromBoolean(customMediaRecorder?.pauseRecording() ?? false))
+            call.resolve(ResponseGenerator.fromBoolean(customMediaRecorder?.pauseRecording() ?? false))
         }
     }
-    
-    @objc func getPowers(_ call: CAPPluginCall) {
-        customMediaRecorder?.getPowers()
-    }
-    
+
     @objc func resumeRecording(_ call: CAPPluginCall) {
         if(customMediaRecorder == nil) {
             call.reject(Messages.RECORDING_HAS_NOT_STARTED)

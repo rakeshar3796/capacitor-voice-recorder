@@ -93,17 +93,6 @@ export class VoiceRecorderImpl {
     }
   }
 
-  public getPowers (): Promise<GenericResponse> {
-    if (this.mediaRecorder == null) {
-      throw recordingHasNotStartedError();
-    } else if (this.mediaRecorder.state === 'recording') {
-      this.mediaRecorder.pause();
-      return Promise.resolve(successResponse());
-    } else {
-      return Promise.resolve(failureResponse());
-    }
-  }
-
   public resumeRecording (): Promise<GenericResponse> {
     if (this.mediaRecorder == null) {
       throw recordingHasNotStartedError();
