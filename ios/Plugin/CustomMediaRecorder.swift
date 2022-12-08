@@ -27,7 +27,6 @@ class CustomMediaRecorder {
             try recordingSession.setActive(true)
             audioFilePath = getDirectoryToSaveAudioFile().appendingPathComponent("\(UUID().uuidString).wav")
             audioRecorder = try AVAudioRecorder(url: audioFilePath, settings: settings)
-            audioRecorder.isMeteringEnabled = true
             audioRecorder.record()
             status = CurrentRecordingStatus.RECORDING
             return true
