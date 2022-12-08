@@ -10,10 +10,9 @@ class CustomMediaRecorder {
     private var status = CurrentRecordingStatus.NONE
     
     private let settings = [
-        AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
-        AVSampleRateKey: 44100,
+        AVFormatIDKey: Int(kAudioFormatLinearPCM),
+        AVSampleRateKey: 16000,
         AVNumberOfChannelsKey: 1,
-        AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
     ]
     
     private func getDirectoryToSaveAudioFile() -> URL {
@@ -26,7 +25,7 @@ class CustomMediaRecorder {
             originalRecordingSessionCategory = recordingSession.category
             try recordingSession.setCategory(AVAudioSession.Category.playAndRecord)
             try recordingSession.setActive(true)
-            audioFilePath = getDirectoryToSaveAudioFile().appendingPathComponent("\(UUID().uuidString).aac")
+            audioFilePath = getDirectoryToSaveAudioFile().appendingPathComponent("\(UUID().uuidString).wav")
             audioRecorder = try AVAudioRecorder(url: audioFilePath, settings: settings)
             audioRecorder.isMeteringEnabled = true
             audioRecorder.record()
@@ -55,15 +54,10 @@ class CustomMediaRecorder {
     
     public func getPowers() {
         audioRecorder.updateMeters()
-        print("AVERAGE POWER", audioRecorder.averagePower(forChannel: 1) as Any)
-        print("PEAK POWER", audioRecorder.peakPower(forChannel: 1) as Any)
     }
     
     public func pauseRecording() -> Bool {
         if(status == CurrentRecordingStatus.RECORDING) {
-            audioRecorder.updateMeters()
-            print("AVERAGE POWER", audioRecorder.averagePower(forChannel: 1) as Any)
-            print("PEAK POWER", audioRecorder.peakPower(forChannel: 1) as Any)
             audioRecorder.pause()
             status = CurrentRecordingStatus.PAUSED
             return true
